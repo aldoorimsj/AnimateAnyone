@@ -1,0 +1,39 @@
+import pygame
+import sys
+
+pygame.init()
+
+# Set up display
+width, height = 400, 400
+screen = pygame.display.set_mode((width, height))
+pygame.display.set_caption("Move Character Up and Down")
+
+# Set up character
+character = pygame.Rect(200, 200, 50, 50)  # x, y, width, height
+character_color = (255, 0, 0)  # Red
+
+# Set up clock
+clock = pygame.time.Clock()
+
+# Set up movement variables
+speed = 5
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_UP]:
+        character.y -= speed
+    if keys[pygame.K_DOWN]:
+        character.y += speed
+
+    # Draw character and update display
+    screen.fill((255, 255, 255))  # White background
+    pygame.draw.rect(screen, character_color, character)
+    pygame.display.flip()
+
+    # Control the frame rate
+    clock.tick(30)
